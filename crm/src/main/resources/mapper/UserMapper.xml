@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace的该属性值通常设置为包名+映射文件名 -->
+<mapper namespace="com.qst.crm.Dao.UserDao">
+    <insert id="register">
+        INSERT INTO `crm`.`user`(`USER_LOGNAME`,`USER_PWD`,`USER_REALNAME`,`USER_EMAIL`,`USER_ROLE`,`USER_TEL`,`USER_HOPPY`,`USER_IMAGE`,`USER_SEX`)
+        VALUES(#{USER_LOGNAME},#{USER_PWD},#{USER_REALNAME},#{USER_EMAIL},#{USER_ROLE},#{USER_TEL},#{USER_HOPPY},#{USER_IMAGE},#{USER_SEX});
+    </insert>
+    <update id="update_pwd">
+        update `crm`.`user` set `USER_PWD`=#{newpwd} where `USER_LOGNAME`=#{userLogname};
+    </update>
+    <select id="selectCheck" resultType="com.qst.crm.po.User">
+        SELECT `user`.`USER_ID`,
+    `USER_LOGNAME`,`USER_PWD`,`USER_REALNAME`,`USER_EMAIL`
+        ,`USER_ROLE`,`USER_TEL`,`USER_HOPPY`,`USER_IMAGE`,`USER_SEX`
+FROM `crm`.`user` where `user`.`USER_LOGNAME`=#{userLogname} and `user`.`USER_PWD`=#{userPwd}
+   </select>
+</mapper>

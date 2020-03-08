@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace的该属性值通常设置为包名+映射文件名 -->
+<mapper namespace="com.qst.crm.Dao.StateDao">
+    <select id="search" resultType="com.qst.crm.po.State">
+        select * from `state` order by sid;
+    </select>
+</mapper>

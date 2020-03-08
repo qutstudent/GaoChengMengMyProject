@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script>
+        window.onload = function(){
+           if($("#hidden").val()!=null){
+               $("#onlogin_name").text($("#hidden").val());
+               $("#islogin").text("已登录");
+               $("#isshow").hide();
+            }
+        };
+        $(document).ready(function () {
+            $("#outlogin").click(function () {
+                $("#hidden").remove();
+                $("#islogin").text("未登录");
+                $("#isshow").show();
+                $("#onlogin_name").text("User");
+            });
+            $("#isshow").click(function () {
+                window.location.href="http://localhost:8081/Register/showRegister";
+            });
+            // $("#prepwd").blur(function () {
+            //     var s=$("#buttonwood").data("prepwd");
+            //     if(s.equals($("#prepwd").val()))
+            //     {    $("#sta").show();
+            //         $("#sta").text("密码与原密码一致！");}
+            //      else $("#sta").text("密码与原密码不一致！");
+            // });
+            $("#modalupdate").click(function () {
+                    var s=$("#buttonwood").data("prepwd");
+                     if(s==$("#prepwd").val())
+                    {   $("#reformat").submit();
+                        $("#myModal").on("hidden.bs.modal", function() {
+                            $(this).removeData("bs.modal");
+                        });
+                    }
+                     else alert("密码与原密码不一致！");
+            });
+
+        });
+
+    </script>
+</head>
+<body style="margin:0 100px 0 100px">
+  <div style="width: 1500px;height: 1000px;margin:0 10px 0 10px;">
+     <div class="container" style="border: #2aabd2 1px wave;width: 1200px;height: 500px;">
+     <div class="row clearfix">
+        <div class="col-md-16 column">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse"
+                            data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span><span class="icon-bar"></span>
+                        <span class="icon-bar"></span></button>
+                    <a class="navbar-brand" href="#">CRM</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <input type="hidden" th:value="${SESSION_USER.getUSER_LOGNAME()}" id="hidden">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="glyphicon glyphicon-user" style="color: rgb(251, 10, 60);margin: 15px auto;
+                        padding-right: 15px" id="onlogin_name">
+                            User
+                        </li>
+                        <li style="color: rgb(251, 148, 60);margin: 15px auto;padding-right: 15px" id="islogin">
+                            未登录
+                        </li>
+                        <li style="color: rgb(251, 140, 606);margin: 15px auto;padding-right: 15px" id="isshow">
+                            注册
+                        </li>
+                        <li>
+                            <a href="#" style="color: rgb(258, 250, 60);" id="outlogin">退出登录</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/user/exit}" style="color: rgb(25, 280, 60);" id="exit">退出</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">个人中心<strong class="caret"></strong></a>
+                            <ul class="dropdown-menu">
+                                <li style="text-align: center">
+                                    <button type="button" value="修改密码"  name="modify"
+                                            data-toggle="modal" data-target="#myModal" data-backdrop="false" data-keyboard="false"
+                                    th:attr="data-prepwd=${SESSION_USER.getUSER_PWD()}" id="buttonwood">修改密码</button>
+                                </li>
+                                <li>
+                                    <a href="#">Another action</a>
+                                </li>
+                                <li>
+                                    <a href="#">Something else here</a>
+                                </li>
+                                <li class="divider">
+                                </li>
+                                <li>
+                                    <a href="#">Separated link</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+     </div>
+     <div class="row clearfix">
+        <div class="col-md-16 column">
+            <nav class="navbar-default navbar-static-side" role="navigation">
+                <div class="col-xs-2">
+                   <ul class="nav nav-tab vertical-tab  nav-second-level" role="tablist"
+                       style="opacity:0.5;;background-color:#1c2b36;">
+                       <li role="presentation" class="active">
+                           <a href="#tab1" aria-controls="home" role="tab" data-toggle="tab">表格</a>
+                       </li>
+<!--                       th:if="${SESSION_USER.getUSER_ROLE()=='loginUser'}"-->
+                       <li role="presentation"  th:if="${SESSION_USER.getUSER_ROLE()}!='loginUser'">
+                           <a href="#tab2" aria-controls="inbox" role="tab" data-toggle="tab">客户信息</a>
+                       </li>
+                       <li role="presentation">
+                           <a href="#tab3" aria-controls="outbox" role="tab" data-toggle="tab" >员工信息</a>
+                       </li>
+                       <li role="presentation"  th:if="${SESSION_USER.getUSER_ROLE()}!='loginUser'">
+                           <a href="#tab4" aria-controls="inbox1" role="tab"  data-toggle="tab" >访问记录</a>
+                       </li>
+                       <li role="presentation" th:if="${SESSION_USER.getUSER_ROLE()}!='loginUser'">
+                           <a href="#tab5" aria-controls="outbox1" role="tab" data-toggle="tab" >订单信息</a>
+                       </li>
+                       <li role="presentation" th:if="${SESSION_USER.getUSER_ROLE()}!='loginUser'">
+                           <a href="#tab6" aria-controls="outbox1" role="tab" data-toggle="tab">订单分页</a>
+                       </li>
+                       <li role="presentation">
+                           <a href="#tab7" aria-controls="outbox1" role="tab" data-toggle="tab">车型信息</a>
+                       </li>
+                   </ul>
+               </div>
+            </nav>
+            <div class="tab-content vertical-tab-content col-xs-10 " >
+                   <div role="tabpanel" class="tab-pane active" id="tab1" style="width: 500px; height: 1000px;">
+                       <ul class="list-group">
+                           <li class="list-group-item">
+                               <a th:href="@{/client/showclient}">客户表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/emp/showemp}">员工表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/order/show_order}">订单表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/record/show_record}">记录表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/vehicle/show_vehicle}">车型表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/state/search}">状态表</a>
+                           </li>
+                           <li class="list-group-item">
+                               <a th:href="@{/fenyeOrder/showlist}">订单分页查询</a>
+                           </li>
+                       </ul>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab2" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe" width="100%" height="100%"
+                               th:src="@{/client/showclient}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab3" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe2" width="100%" height="100%"
+                               th:src="@{/emp/showemp}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab4" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe3" width="100%" height="100%"
+                               th:src="@{/record/show_record}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab5" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe4" width="100%" height="100%"
+                               th:src="@{/order/show_order}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab6" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe5" width="100%" height="100%"
+                               th:src="@{/fenyeOrder/showlist}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+                   <div role="tabpanel" class="tab-pane" id="tab7" style="width: 1000px; height: 1000px;">
+                       <iframe id="J_iframe6" width="100%" height="100%"
+                               th:src="@{/vehicle/show_vehicle}" frameborder="0" data-id="index_v1.html" seamless=""></iframe>
+                   </div>
+            </div>
+        </div>
+     <div class="row clearfix">
+        <div class="col-md-16 column">
+            <div class="section-06">
+                <div class="sectionInnerWrapper">
+                    <p>100多个行业，全球30万家企业的一致信赖</p>
+                    <span>©1996 - 2019 Zoho Corporation 保留一切权利 京ICP备15015257号 京ICP证150718号</span>
+                    <span>北京市海淀区后屯路28号KPHZ国际技术转移中心三层&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;服务热线：400-660-8680&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;010-82738868&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联系邮箱：support@zohocorp.com.cn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+  </div>
+  </div>
+<!--&#45;&#45;&#45;&#45;-->
+  <!-- 模态框（Modal）-->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                      &times;
+                  </button>
+                  <h4 class="modal-title" id="myModalLabel1">
+                      修改密码
+                  </h4>
+              </div>
+              <div class="modal-body">
+                  <div style="width: 500px;margin: 40px auto">
+                      <form  th:action="@{'http://localhost:8081/user/updatepwd?userlogname='+${SESSION_USER.getUSER_LOGNAME()}}"
+                             class="form-horizontal" method="post" id="reformat">
+                          <div class="form-group">
+                              <label for="prepwd" class="col-sm-2 control-label">原密码</label>
+                              <div class="col-sm-5">
+                                  <input type="text" class="form-control" id="prepwd" name="prepwd" placeholder="请输入原密码">
+                              </div>
+                          </div>
+                          <div class="form-group">
+                              <label for="newpwd" class="col-sm-2 control-label">新密码</label>
+                              <div class="col-sm-5">
+                                  <input type="text" class="form-control" id="newpwd" name="newpwd" placeholder="请输入新密码">
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                  <!--                data-dismiss是bootstrap里自定义的属性，给一个元素data-dimiss属性的话，可以通过点击该元素达到让目标消失的效果。-->
+                  <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                  </button>
+                  <button type="button" class="btn btn-primary"  id="modalupdate">
+                      提交更改
+                  </button>
+              </div><!-- /.modal-content -->
+          </div>
+      </div><!-- /.modal -->
+  </div>
+  <!--&#45;&#45;&#45;&#45;-->
+</body>
+</html>

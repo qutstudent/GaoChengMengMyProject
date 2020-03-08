@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>记录</title>
+    <script src="../jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="../bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $("[name='modify']").click(function () {
+                //根据组件的父子关系定位到id属性的值
+                var base=$(this).parent().parent().children();
+                var rid=base.eq(0).text();
+                var cid=base.eq(1).text();
+                var eid=base.eq(2).text();
+                var time=base.eq(3).text();
+                var v_t=base.eq(4).text();
+                var state=base.eq(5).text();
+                var w_v=base.eq(6).text();
+                //给模态框传递数据
+                $("#updaterid").val(rid);
+                $("#updatecid").val(cid);
+                $("#updateeid").val(eid);
+                $("#updatetime").val(time);
+                $("#updatevisit_type").val(v_t);
+                $("#updatestate").val(state);
+                $("#updateabout_car").val(w_v);
+            });
+            var id=0;
+            $("#records tr").click(function () {
+                if($("#records tr").hasClass("selected"))
+                    $("#records tr").removeClass("selected");
+                else $(this).addClass("selected");
+                id=$(this).children().first().text();
+            });
+            $("#update").click(function(){
+                if (id !== 0) {
+                    var base=$("#records .selected");
+                    var rid=base.children().eq(0).text();
+                    var cid=base.children().eq(1).text();
+                    var eid=base.children().eq(2).text();
+                    var time=base.children().eq(3).text();
+                    var v_t=base.children().eq(4).text();
+                    var state=base.children().eq(5).text();
+                    var w_v=base.children().eq(6).text();
+                    //给模态框传递数据
+                    $("#updaterid").val(rid);
+                    $("#updatecid").val(cid);
+                    $("#updateeid").val(eid);
+                    $("#updatetime").val(time);
+                    $("#updatevisit_type").val(v_t);
+                    $("#updatestate").val(state);
+                    $("#updateabout_car").val(w_v);
+                }
+                else alert("您未选中一行");
+
+            });
+            $("#delete").click(function () {
+                if (id !== 0)//id=0说明未选中
+                    $.ajax({
+                        dataType: "text",
+                        type: "POST", //提交方式
+                        url: "http://localhost:8081/record/delete",
+                        data: {"rid": id
+                        },//数据，这里使用的是Json格式进行传输
+                        success: function (result) {//返回数据根据结果进行相应的处理
+                           // alert(result.val());
+                            $("#records .selected").hide();
+                        },
+                        error: function () {
+                            alert("请求出错");
+                        }
+                    });
+                else alert("您未选中一行");
+            });
+            $("[name='delete']").click(function () {
+                var rid=$(this).parent().parent().children().first().text();
+                $.ajax({
+                    dataType: "text",
+                    type: "POST", //提交方式
+                    url: "http://localhost:8081/record/delete",
+                    data: {"rid": rid
+                    },//数据，这里使用的是Json格式进行传输
+                    success: function (result) {//返回数据根据结果进行相应的处理
+                        // alert(result.val());
+                        $("#records .selected").hide();
+                    },
+                    error: function () {
+                        alert("请求出错");
+                    }
+                });
+            });
+             // $("#myModal").click(function(){
+             //     $(this).modal('hide');
+             // });
+            //设置时间响应：单击模态框上的“提交更改” 时提交表单
+             $("#modalupdate").click(function () {
+                 $("#recformupdate").submit();
+                 $("#myModal2").on("hidden.bs.modal", function() {
+                     $(this).removeData("bs.modal");
+                 });
+             });
+            $("#modaladd").click(function () {
+                $("#recformadd").submit();
+                $("#myModal1").on("hidden.bs.modal", function() {
+                    $(this).removeData("bs.modal");
+                });
+            });
+         });
+    </script>
+    <style type="text/css">
+        #records .selected{
+            background-color: #2aabd2;
+        }
+    </style>
+</head>
+<body>
+<div style="width:1000px;margin:20px auto">
+      <table class="table table-striped table-bordered table-hover" id="records">
+        <tr><th>Id</th><th>客户编号</th><th>员工编号</th><th>时间</th><th>访问方式</th><th>状态</th><th>理想车型</th><th>操作</th></tr>
+        <tr th:each="rec:${recordlist}">
+            <!--　至于<td></td>里面的原有的值只是为了给前端开发时做展示用的.这样的话很好的做到了前后端分离。-->
+            <td th:text="${rec.getRid()}">id</td>
+            <td th:text="${rec.getClient().getCid()}">客户编号</td>
+            <td th:text="${rec.getEmp().getEid()}">员工编号</td>
+<!--            <td th:text="${rec.getTime()}">时间</td>-->
+            <td th:text="${#dates.format(rec.getTime(),'yyyy-MM-dd')}">时间</td>
+            <td th:text="${rec.getVisit_type()}">访问方式</td>
+            <td th:text="${rec.getState().getSid()}">状态</td>
+            <td th:text="${rec.getVehicle().getModel()}">理想车型</td>
+            <td colspan="2">
+                <button type="button" value="修改" class="btn btn-primary"  name="modify"
+                        data-toggle="modal" data-target="#myModal2" data-backdrop="false" data-keyboard="false">修改</button>
+                <button type="button" value="删除" class="btn btn-primary"  name="delete">删除</button>
+            </td>
+        </tr>
+    </table>
+    <button type="button" value="添加" id="add" class="btn btn-primary"
+            data-toggle="modal" data-target="#myModal1" data-backdrop="false" data-keyboard="false">添加</button>
+    <button type="button" value="修改" id="update" class="btn btn-primary"
+            data-toggle="modal" data-target="#myModal2" data-backdrop="false" data-keyboard="false">修改</button>
+    <button type="button" value="删除" id="delete" class="btn btn-primary">删除</button>
+</div>
+<!-- 模态框（Modal）1 -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">
+                    添加记录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="width: 500px;margin: 40px auto">
+                      <form  th:action="@{http://localhost:8081/record/add}"
+                             class="form-horizontal" method="post" id="recformadd">
+                            <div class="form-group">
+                                <label for="cid" class="col-sm-2 control-label">客户</label>
+                                <div class="col-sm-10">
+                                    <select type="text" class="form-control" name="cid" id="cid">
+                                        <option th:value="${client.getCid()}" th:each="client:${clientlist}"
+                                                th:text="${client.getName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="eid" class="col-sm-2 control-label">相关员工</label>
+                                <div class="col-sm-10">
+                                    <select type="text" class="form-control" name="eid" id="eid">
+                                        <option th:value="${emp.getEid()}" th:each="emp:${emplist}" th:text="${emp.getName()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="time" class="col-sm-2 control-label">时间</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="time" name="time" placeholder="请输入时间">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="visit_type" class="col-sm-2 control-label">访问方式</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="visit_type" name="visit_type" placeholder="请输入访问方式">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="about_car" class="col-sm-2 control-label">相关车型</label>
+                                <div class="col-sm-10">
+                                    <select type="text" class="form-control" name="about_car" id="about_car">
+                                        <option th:value="${car.model}" th:each="car:${vehiclelist}" th:text="${car.model}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="col-sm-2 control-label">状态</label>
+                                <div class="col-sm-10">
+                                    <select type="text" class="form-control" name="state" id="state">
+                                        <option th:value="${state.getSid()}" th:each="state:${statelist}" th:text="${state.getExpretion()}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                      </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+<!--                data-dismiss是bootstrap里自定义的属性，给一个元素data-dimiss属性的话，可以通过点击该元素达到让目标消失的效果。-->
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary"  id="modaladd">
+                    提交更改
+                </button>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+</div>
+<!-------------------->
+<!--模态框2-->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabe2">
+                   修改记录
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div style="width: 500px;margin: 40px auto">
+                    <form  th:action="@{http://localhost:8081/record/update}"
+                           class="form-horizontal" method="post" id="recformupdate">
+                        <input type="hidden" th:name="updaterid" th:value="updaterid" th:id="updaterid"/>
+                        <div class="form-group">
+                            <label for="updatecid" class="col-sm-2 control-label">客户</label>
+                            <div class="col-sm-10">
+                                <select type="text" class="form-control" th:name="updatecid" id="updatecid">
+                                    <option th:value="${client.getCid()}" th:each="client:${clientlist}"
+                                            th:text="${client.getName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updateeid" class="col-sm-2 control-label">相关员工</label>
+                            <div class="col-sm-10">
+                                <select type="text" class="form-control" name="updateeid" id="updateeid">
+                                    <option th:value="${emp.getEid()}" th:each="emp:${emplist}" th:text="${emp.getName()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updatetime" class="col-sm-2 control-label">时间</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="updatetime" name="updatetime" placeholder="请输入时间">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="updatevisit_type" class="col-sm-2 control-label">访问方式</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="updatevisit_type" name="updatevisit_type" placeholder="请输入访问方式">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="updateabout_car" class="col-sm-2 control-label">相关车型</label>
+                            <div class="col-sm-10">
+                                <select type="text" class="form-control" name="updateabout_car" id="updateabout_car">
+                                    <option th:value="${car.model}" th:each="car:${vehiclelist}" th:text="${car.model}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="updatestate" class="col-sm-2 control-label">状态</label>
+                            <div class="col-sm-10">
+                                <select type="text" class="form-control" name="updatestate" id="updatestate">
+                                    <option th:value="${state.getSid()}" th:each="state:${statelist}"
+                                            th:text="${state.getExpretion()}"></option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" id="modalupdate">
+                    提交更改
+                </button>
+            </div><!-- /.modal-content -->
+        </div>
+    </div><!-- /.modal -->
+</div>
+<!-------------------->
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

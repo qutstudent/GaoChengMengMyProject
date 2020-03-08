@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace的该属性值通常设置为包名+映射文件名 -->
+<mapper namespace="com.qst.crm.Dao.VehicleDao">
+    <select id="search" resultMap="searchMap">
+        select * from vehicle v join color c on v.color=c.colorname;
+    </select>
+    <resultMap id="searchMap" type="Vehicle">
+        <id column="model" property="model"/>
+        <result column="price" property="price"/>
+        <association property="color" javaType="Color">
+            <id property="colorname" column="color"/>
+        </association>
+    </resultMap>
+
+</mapper>

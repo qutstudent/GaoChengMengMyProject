@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!-- namespace的该属性值通常设置为包名+映射文件名 -->
+<mapper namespace="com.qst.crm.Dao.ClientDao">
+    <!--查询所有-->
+    <select id="search" resultMap="searchMap">
+        select c.cid as c_id,c.name as c_name, c.tel as c_tel,v.model as v_model,
+         e.eid as e_eid, c.budget as budget, c.comments as comments from client c, vehicle v,employee e
+        where c.want_car=v.model and c.e_id=e.eid order by c.cid;
+    </select>
+    <resultMap id="searchMap" type="Client">
+        <id property="cid" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <result property="tel" column="c_tel"/>
+        <result property="budget" column="budget"/>
+        <result property="comments" column="comments"/>
+        <association property="vehicle" javaType="Vehicle">
+            <id property="model" column="v_model"/>
+        </association>
+        <association property="emp" javaType="Employee">
+            <id property="eid" column="e_eid"/>
+        </association>
+    </resultMap>
+    <!--根据cid查询-->
+    <select id="searchById" parameterType="Integer" resultMap="searchByIdMap">
+        select c.cid as c_id,c.name as c_name, c.tel as c_tel,v.model as v_model,
+         e.eid as e_eid, c.budget as budget, c.comments as comments from client c, vehicle v,employee e
+        where c.want_car=v.model and c.e_id=e.eid and c.cid=#{cid} order by c_id;
+    </select>
+    <resultMap id="searchByIdMap" type="Client">
+        <id property="cid" column="c_id"/>
+        <result property="name" column="c_name"/>
+        <result property="tel" column="c_tel"/>
+        <result property="budget" column="budget"/>
+        <result property="comments" column="comments"/>
+        <association property="vehicle" javaType="Vehicle">
+            <id property="model" column="v_model"/>
+        </association>
+        <association property="emp" javaType="Employee">
+            <id property="eid" column="e_eid"/>
+        </association>
+    </resultMap>
+    <!--插入-->
+    <insert id="add" parameterType="Client">
+        INSERT INTO `client`(`name`,`tel`,`want_car`,`e_id`,`budget`,`comments`)
+        VALUES(#{name},#{tel},#{vehicle.model},#{emp.eid},#{budget},#{comments});
+    </insert>
+    <update id="updateById" parameterType="Client">
+        UPDATE `crm`.`client` SET
+        `name`=#{name},
+        `tel`=#{tel},
+        `want_car`=#{vehicle.model},
+        `e_id`=#{emp.eid},
+        `budget`=#{budget},
+        `comments`=#{comments}
+        WHERE `cid`=#{cid};
+     </update>
+    <delete id="deleteById">
+        delete  from `client` where cid=#{cid}
+    </delete>
+</mapper>
