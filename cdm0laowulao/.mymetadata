@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="cdm0laowulao"
+  id="myeclipse.1480747586091"
+  context-root="/cdm0laowulao"
+  j2ee-spec="5.0"
+  archive="cdm0laowulao.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

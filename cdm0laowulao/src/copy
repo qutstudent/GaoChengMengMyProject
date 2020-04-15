@@ -1,0 +1,41 @@
+
+
+    <div style="background:#f9f9f9; padding-top:30px; margin-top:30px; padding-bottom:10px">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="productBox">
+                        <div class="titleBar">
+                            <h1><%=newJcpeizhi.getSjduochuBieming() %><%=newJcpeizhi.getSjlaiyuanBieming() %></h1>
+                            <span></span>
+                            <%if(sjlaiyuans!=null){ %>
+							<%for(int i = 0; i < sjlaiyuans.size(); i++){ %>
+                            <a href="<%=basePath %>wangzhan/sjduochulist.jsp?sjlaiyuanId=<%=sjlaiyuans.get(i).getSjlaiyuanId() %>"><%=sjlaiyuans.get(i).getSjlaiyuanName() %></a>
+                            <%} %>
+                            <%} %>
+                            <a class="rightMore" href="<%=basePath %>wangzhan/sjduochulist.jsp">>></a>
+                        </div>
+                        <div class="list">
+                        <%if(sjduochus!=null){ %>
+			            <%for(int i = 0; i < sjduochus.size(); i++){ %>
+			            	<%Sjduochu newSjduochu = sjduochus.get(i); %>
+                            <div class="col-xs-6 col-sm-3 col-md-2 col-mm-6 productImg">
+                                <a title="PRO-001" href='<%=basePath %>wangzhan/sjduochushow.jsp?sjduochuId=<%=newSjduochu.getSjduochuId()%>'>
+                                    <span class="imgLink-hover"><span class="hover-link"></span></span>
+                                    <img src="<%=basePath %><%=newSjduochu.getSjduochuImg() %>" alt="PRO-001" />
+                                </a>
+                                <a class="productTitle" href="<%=basePath %>wangzhan/sjduochushow.jsp?sjduochuId=<%=newSjduochu.getSjduochuId()%>" title="<%=newSjduochu.getSjduochuName() %>">
+                                    <%=newSjduochu.getSjduochuName() %>
+                                </a>
+                            </div>
+                        <%} %>
+                        <%} %>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
