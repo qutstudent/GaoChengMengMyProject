@@ -55,9 +55,7 @@ body {
 			<td><iframe frameborder="0" src="${path}/admin/body" name="body"></iframe>
 			</td>
 		</tr>
-		<tr>
-			<th style="text-align:center; text-decoration: none;font-size:17px;font-weight:bold;color:#afeeee"><a href="${path}/admin/login">返回管理员登录页面</a></th>
-		</tr>
+
 	</table>
 </body>
 </html>

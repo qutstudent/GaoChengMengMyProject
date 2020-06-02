@@ -41,6 +41,8 @@ body {
 		var releaseTime_=$("#releaseTime").val();
 		var realname_=$("#realname").val();
 		var companyName_=$("#companyName").val();
+		console.log("公司地址"+jobAddress_);
+
 		$.ajax({
 			url:"${pageContext.request.contextPath}/apply/accpet",
 			data:{

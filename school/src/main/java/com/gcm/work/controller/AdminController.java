@@ -23,7 +23,7 @@ public class AdminController {
 	private IAdminService adminService;
 	/**
 	 * 管理员登录
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("login")
 	public String AdminLogin(Model model){
@@ -31,7 +31,7 @@ public class AdminController {
 	}
 	/**
 	 * 后台首页
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("index")
 	public String AdminIndex(Model model){
@@ -39,7 +39,7 @@ public class AdminController {
 	}
 	/**
 	 * 跳转到后台top.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("top")
 	public String toTop() {
@@ -47,7 +47,7 @@ public class AdminController {
 	}
 	/**
 	 * 跳转到left.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("left")
 	public String toLeft() {
@@ -55,7 +55,7 @@ public class AdminController {
 	}
 	/**
 	 * 跳转到body.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("body")
 	public String toBody() {
@@ -63,7 +63,7 @@ public class AdminController {
 	}
 	/**
 	 * 进入管理员登录
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 * */
 	@RequestMapping("accessLogin")
@@ -83,7 +83,7 @@ public class AdminController {
 	}
 	/**
 	 * 退出登录
-	 * @author slj
+	 * @author gcm
 	 * @param request
 	 * @return
 	 * @throws Exception 

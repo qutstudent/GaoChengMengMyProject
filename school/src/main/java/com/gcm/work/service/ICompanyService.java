@@ -22,7 +22,7 @@ public interface ICompanyService {
 	/**
 	 * 校验登录名是否存在
 	 * 
-	 * @author slj
+	 * @author gcm
 	 * @param companyLoginName  公司登录名字
 	 * @return
 	 */
@@ -30,18 +30,18 @@ public interface ICompanyService {
 
 	/**
 	 * 公司注册
-	 * @author slj
+	 * @author gcm
 	 */
 	public void save(Company company);
 	/**
 	 * 公司注册 
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	public Company getCompanyByNameAndPwd(String companyLoginName, String companyPwd);
 	/**
 	 * 判定公司名称是否唯一
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	public int findByCompanyName(String companyName);

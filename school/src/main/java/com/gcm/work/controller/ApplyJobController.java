@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * 求职申请控制
- * @author slj
+ * @author gcm
  * */
 @Controller
 @RequestMapping("/apply")
@@ -27,13 +27,13 @@ public class ApplyJobController {
 	private IApplyJobService applyJobService;
 	/**
 	 * 企业查询所有的申请者
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("/findApply")
 	public String findAllApply(String companyName, Model model, HttpServletRequest request){
 		Company company = (Company) request.getSession().getAttribute("currCom");
 		if(company!=null){
-			String currCompanyName= EncodingTool.encodeStr(companyName);
+			String currCompanyName= companyName;
 			List<Apply> applyList = applyJobService.findAllByCompanyName(currCompanyName);
 			model.addAttribute("applyList", applyList);
 			return "/apply/showApply";
@@ -43,7 +43,7 @@ public class ApplyJobController {
 	}
 	/**
 	 * 接收界面参数，判断是否是第一次插入
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("/accpet")
 	@ResponseBody
@@ -80,17 +80,15 @@ public class ApplyJobController {
 	}
 	/**
 	 * 职位投递记录
-	 * @author slj
 	 * */
 	@RequestMapping("/applyRecord")
 	public String findApplyByRealName(String realname, Model model){
-		List<Apply> applyList_ = applyJobService.findApplyRecordByRealname(EncodingTool.encodeStr(realname));
+		List<Apply> applyList_ = applyJobService.findApplyRecordByRealname(realname);
 		model.addAttribute("applyList_", applyList_);
 		return "/apply/showApplyRecord";
 	}
 	/**
 	 * 根据ID删除职位投递记录
-	 * @author slj
 	 * */
 	@RequestMapping("deleteById")
 	public String deleteById(Integer sid) {

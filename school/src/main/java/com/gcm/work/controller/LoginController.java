@@ -21,7 +21,7 @@ public class LoginController {
 	private IUserService userService;
 	/**
 	 * 跳转至登录页面
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("login")
@@ -30,7 +30,7 @@ public class LoginController {
 	}	
 	/**
 	 * 进入用户登录
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 * */
 	@RequestMapping("/accessLogin")

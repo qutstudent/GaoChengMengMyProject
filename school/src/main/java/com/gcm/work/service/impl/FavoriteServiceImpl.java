@@ -19,7 +19,7 @@ public class FavoriteServiceImpl implements IFavoriteService {
 	public FavoritesMapper favoritesMapper;
 	/**
 	 * 判断是否是第一次收藏
-	 * @author slj
+	 * @author gcm
 	 * */
 	public Favorites findFavoriteByAll_(String realname, String jobAddress, String jobName, String companyName) {
 		FavoritesExample example=new FavoritesExample();
@@ -44,7 +44,7 @@ public class FavoriteServiceImpl implements IFavoriteService {
 	}
 	/**
 	 * 插入收藏
-	 * @author slj
+	 * @author gcm
 	 * */
 	public int insertFavorite(Favorites favorites_) {
 		int result = favoritesMapper.insert(favorites_);
@@ -52,7 +52,7 @@ public class FavoriteServiceImpl implements IFavoriteService {
 	}
 	/**
 	 * 查询职位收藏记录
-	 * @author slj
+	 * @author gcm
 	 * */
 	public List<Favorites> findFavoriteByRealName(String realname) {
 		FavoritesExample example=new FavoritesExample();

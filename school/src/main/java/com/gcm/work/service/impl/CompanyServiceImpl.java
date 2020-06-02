@@ -18,7 +18,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	
 	@Resource
 	public CompanyMapper companyMapper;
-	//公司登录
+	//公司注册
 	public void save(Company Company) {
 		companyMapper.insert(Company);
 	}
@@ -46,7 +46,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	}
 	/**
 	 * 查询登录名是否存在
-	 * @author slj
+	 * @author gcm
 	 * @param companyLoginName 企业注册的登录名
 	 * @return
 	 * */
@@ -67,7 +67,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	}
 	/**
 	 * 企业登录时登录名和密码校验
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 * */
 	public Company getCompanyByNameAndPwd(String companyLoginName, String companyPwd) {
@@ -87,7 +87,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	}
 	/**
 	 * 查询公司名称是否存在
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 * */
 	public int findByCompanyName(String companyName) {

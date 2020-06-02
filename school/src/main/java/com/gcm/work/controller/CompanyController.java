@@ -86,17 +86,17 @@ public class CompanyController {
 	@RequestMapping("show")
 	public String show(Integer cid, String jobName, String jobAddress, Date releaseTime, Double jobSalary, String companyName, Model model){
 		Company company = companyService.findCompanyById(cid);
-		model.addAttribute("jobName", EncodingTool.encodeStr(jobName));
-		model.addAttribute("jobAddress",  EncodingTool.encodeStr(jobAddress));
+		model.addAttribute("jobName", jobName);
+		model.addAttribute("jobAddress",  jobAddress);
 		model.addAttribute("releaseTime", releaseTime);
 		model.addAttribute("jobSalary",jobSalary);
-		model.addAttribute("companyName", EncodingTool.encodeStr(companyName));
+		model.addAttribute("companyName", companyName); //EncodingTool.encodeStr()
 		model.addAttribute("company", company);
 		return "/job/showOneCompany";
 	}
 	/**
 	 * 企业登录
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("accessComLogin")
 	@ResponseBody
@@ -115,7 +115,7 @@ public class CompanyController {
 	}
 	/**
 	 * 跳转到添加职位页面
-	 *  @author slj
+	 *  @author gcm
 	 * */
 	@RequestMapping("toAddPost")
 	public String toAddPost(Model model) {
@@ -125,7 +125,7 @@ public class CompanyController {
 
 	/**
 	 * 添加职位
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("addPost")
 	@ResponseBody
@@ -163,7 +163,7 @@ public class CompanyController {
 	}
 	/**
 	 * 跳转至企业登录页面
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("login")
@@ -172,7 +172,7 @@ public class CompanyController {
 	}	
 	/**
 	 * 跳转至企业注册页面
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("regist")
@@ -181,7 +181,7 @@ public class CompanyController {
 	}	
 	/**
 	 * 跳转至企业首页
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("index")
@@ -190,7 +190,7 @@ public class CompanyController {
 	}	
 	/**
 	 * 退出登录
-	 * @author slj
+	 * @author gcm
 	 * @param request
 	 * @return
 	 * @throws Exception 
@@ -204,7 +204,7 @@ public class CompanyController {
 	}
 	/**
 	 * 跳转到后台top.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("top")
 	public String toTop() {
@@ -212,7 +212,7 @@ public class CompanyController {
 	}
 	/**
 	 * 跳转到left.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("left")
 	public String toLeft() {
@@ -220,7 +220,7 @@ public class CompanyController {
 	}
 	/**
 	 * 跳转到body.jsp
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("body")
 	public String toBody() {

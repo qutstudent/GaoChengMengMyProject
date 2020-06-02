@@ -19,7 +19,7 @@ public class ApplyJobServiceImpl implements IApplyJobService{
 	public ApplyMapper applyMapper;
 	/**
 	 * 根据工作名字查询职位
-	 * @author slj
+	 * @author gcm
 	 * */
 	public Apply findApplyByAll(String realname,String jobAddress,String jobName) {
 		ApplyExample example=new ApplyExample();
@@ -41,7 +41,7 @@ public class ApplyJobServiceImpl implements IApplyJobService{
 	}
 	/**
 	 * 插入具体职位值
-	 * @author slj
+	 * @author gcm
 	 * */
 	public int insertApply(Apply newApply) {
 		int result = applyMapper.insert(newApply);
@@ -49,7 +49,7 @@ public class ApplyJobServiceImpl implements IApplyJobService{
 	}
 	/**
 	 * 根据ID删除职位投递记录
-	 * @author slj
+	 * @author gcm
 	 * */
 	public void deleteById(Integer sid) {
 		ApplyExample example=new ApplyExample();
@@ -59,7 +59,7 @@ public class ApplyJobServiceImpl implements IApplyJobService{
 	}
 	/**
 	 * 根据真实姓名查询所有的申请记录
-	 * @author slj
+	 * @author gcm
 	 * */
 	public List<Apply> findApplyRecordByRealname(String realname) {
 		ApplyExample example=new ApplyExample();
@@ -76,7 +76,7 @@ public class ApplyJobServiceImpl implements IApplyJobService{
 	}
 	/**
 	 * 根据企业名查询所有的申请者
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 * */
 	public List<Apply> findAllByCompanyName(String companyName) {

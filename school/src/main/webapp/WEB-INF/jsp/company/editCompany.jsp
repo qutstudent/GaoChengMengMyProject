@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>修改用户信息</title>
+<title>修改企业信息</title>
 <link href="${path}/css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="${path}/js/jquery.min.js"></script>
 <script type="text/javascript" src="${path}/js/bootstrap.js"></script>

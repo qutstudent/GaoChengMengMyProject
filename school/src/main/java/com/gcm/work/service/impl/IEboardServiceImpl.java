@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 @Transactional
 public class IEboardServiceImpl implements IEboardService {
-	
+
 	@Resource
 	public EboardMapper eboardMapper;
 	
@@ -28,5 +28,6 @@ public class IEboardServiceImpl implements IEboardService {
 		}
 		return null;
 	}
+
 
 }

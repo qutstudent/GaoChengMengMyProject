@@ -19,7 +19,7 @@ import java.util.List;
 public class FavoritesController {
 	/**
 	 * 职位收藏
-	 * @author slj
+	 * @author gcm
 	 * */
 	@Autowired
 	private IFavoriteService favoriteService;
@@ -59,11 +59,11 @@ public class FavoritesController {
 	}
 	/**
 	 * 职位收藏记录
-	 * @author slj
+	 * @author gcm
 	 * */
 	@RequestMapping("/favoriteRecord")
 	public String findFavoriteByRealName(String realname, Model model){
-		List<Favorites> favoritesList= favoriteService.findFavoriteByRealName(EncodingTool.encodeStr(realname));
+		List<Favorites> favoritesList= favoriteService.findFavoriteByRealName(realname);
 		model.addAttribute("favoritesList", favoritesList);
 		return "/favorite/showFavoriteListRecord";
 	}

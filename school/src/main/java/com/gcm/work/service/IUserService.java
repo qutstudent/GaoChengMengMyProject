@@ -8,7 +8,7 @@ public interface IUserService {
 	/**
 	 * 用户注册
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	public void save(User user);
 
@@ -31,7 +31,7 @@ public interface IUserService {
 	public int findByUserLoginName(String loginName);
 	/**
 	 * 根据真实姓名查找用户
-	 * @author slj
+	 * @author gcm
 	 * */
 	public User findUserByRealname(String realname);
 	

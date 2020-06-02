@@ -9,7 +9,7 @@ public class MainController {
 	/**
 	 * 跳转到主页
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("index")
 	public String toIndex() {
@@ -19,7 +19,7 @@ public class MainController {
 	/**
 	 * 跳转到top.jsp
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("top")
 	public String toTop() {
@@ -29,7 +29,7 @@ public class MainController {
 	/**
 	 * 跳转到left.jsp
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("left")
 	public String toLeft() {
@@ -38,7 +38,7 @@ public class MainController {
 	/**
 	 * 跳转到body.jsp
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("body")
 	public String toBody() {
@@ -48,7 +48,7 @@ public class MainController {
 	/**
 	 * 跳转到用户注册页面
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("registUser")
 	public String toRegistUser() {
@@ -58,7 +58,7 @@ public class MainController {
 	/**
 	 * 跳转到企业注册页面
 	 * 
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("registCom")
 	public String toRegistCom() {

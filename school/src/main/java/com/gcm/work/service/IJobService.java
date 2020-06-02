@@ -9,7 +9,7 @@ public interface IJobService {
 	/**
 	 * 查看所有工作职位
 	 * 
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	public List<JobInfoExt> findAll(String jobName, String jobAddress, String companyName);

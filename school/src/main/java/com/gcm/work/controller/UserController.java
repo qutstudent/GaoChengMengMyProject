@@ -85,7 +85,7 @@ public class UserController {
 	}
 	/**
 	 * 修改提交功能
-	 * @author slj
+	 * @author gcm
 	 * @param uid 用户id
 	 * @param user 用户对象
 	 * @return
@@ -98,7 +98,7 @@ public class UserController {
 
 	/**
 	 * 用户注册
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("registUser")
@@ -118,11 +118,11 @@ public class UserController {
 	}
 	/**
 	 * 企业根据用户真实名字查询其详细
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("findUserByRealname")
 	public String findUserByRealname(String realname, Model model) {
-		User user = userService.findUserByRealname(EncodingTool.encodeStr(realname));
+		User user = userService.findUserByRealname(realname);
 		if(user!=null){		
 			model.addAttribute("user", user);
 			return "/company/listUser";
@@ -132,7 +132,7 @@ public class UserController {
 	}
 	/**
 	 * 用户登录
-	 * @author slj
+	 * @author gcm
 	 * @return
 	 */
 	@RequestMapping("login")
@@ -141,7 +141,7 @@ public class UserController {
 	}
 	/**
 	 * 跳转到注册页面
-	 * @author slj
+	 * @author gcm
 	 */
 	@RequestMapping("regist")
 	public String toRegist(Model model) {
@@ -149,7 +149,7 @@ public class UserController {
 	}
 	/**
 	 * 退出登录
-	 * @author slj
+	 * @author gcm
 	 * @param request
 	 * @return
 	 * @throws Exception 

@@ -29,7 +29,7 @@ table td {
 			<tr class="info">
 				<td colspan="10" align="center"><h3>求职者详细信息</h3></td>
 			</tr>
-			<tr class="success" height="40px;" style="padding-top: '10px;'">
+			<tr class="success" height="40px;" style="padding-top: 10px;">
 				<td>真实姓名</td>
 				<td>性别</td>
 				<td>电话</td>

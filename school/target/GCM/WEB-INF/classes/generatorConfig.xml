@@ -3,9 +3,9 @@
 <generatorConfiguration >
   <classPathEntry location="D:\Utils\mysql-connector-java-5.0.8-bin.jar" />
   <context id="context1" >
-    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3366/work" 
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/test"
     				userId="root" password="123" />
-    <javaModelGenerator targetPackage="com.song.work.model" targetProject="Work" >
+    <javaModelGenerator targetPackage="com.gcm.work.model" targetProject="Work" >
     	 <property name="constructorBased" value="false"/>
 
         <!-- 在targetPackage的基础上，根据数据库的schema再生成一层package，最终生成的类放在这个package下，默认为false -->
@@ -28,9 +28,9 @@
         <property name="trimStrings" value="false"/>
     </javaModelGenerator>
     
-    <sqlMapGenerator targetPackage="com.song.work.dao.mapper" targetProject="Work" />
+    <sqlMapGenerator targetPackage="com.gcm.work.dao.mapper" targetProject="Work" />
     
-    <javaClientGenerator targetPackage="com.song.work.dao.mapper" targetProject="Work" type="XMLMAPPER" />
+    <javaClientGenerator targetPackage="com.gcm.work.dao.mapper" targetProject="Work" type="XMLMAPPER" />
     
     <!-- <table tableName="admin" />
     <table tableName="favorites"/>

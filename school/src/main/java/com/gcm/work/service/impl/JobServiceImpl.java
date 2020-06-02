@@ -26,7 +26,7 @@
      private JobMapper jobMapper;
      /**
       * 查询所有的工作
-      * @author slj
+      * @author gcm
       * @return
       * */
      public List<JobInfoExt> findAll(String jobName, String jobAddress, String companyName) {

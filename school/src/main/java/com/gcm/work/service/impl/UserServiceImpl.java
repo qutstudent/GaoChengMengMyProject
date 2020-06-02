@@ -13,7 +13,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-@Transactional
+//@Transactional
 
 public class UserServiceImpl implements IUserService {
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements IUserService {
 	
 	/**
 	 * 根据名字和密码查询用户
-	 * @author slj
+	 * @author gcm
 	 * */
 	public User getUserByNameAndPwd(String loginName, String loginPwd) {
 		UserExample example = new UserExample();
@@ -72,7 +72,7 @@ public class UserServiceImpl implements IUserService {
 	}
 	/**
 	 * 根据用户登录名来查询
-	 * @author slj
+	 * @author gcm
 	 * */
 	public int findByUserLoginName(String loginName) {
 		int result=0; 

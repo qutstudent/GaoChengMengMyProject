@@ -49,7 +49,7 @@ li {
 				<ul class="nav nav-pills bg">
 					<li class="active"><a href="${path}/main/index"
 						target="_parent">Welcome to 老吾老幼吾幼招聘求职网</a></li>
-					<li style="width: 420px;"></li>
+					<li style="width: 320px;"></li>
 					<li class="col-md-2" style="text-align:center;"><a href="javascript:void(0)">用户：${sessionScope.currUser.realname}</a></li>
 					<li class="col-sm-1" style="width:140px;"><a href="${path}/user/showResume" target="body">个人简历</a></li>
 					<li class="col-sm-1" style="text-align:center;"><a href="${path}/user/exit" target="_parent">退出</a></li>

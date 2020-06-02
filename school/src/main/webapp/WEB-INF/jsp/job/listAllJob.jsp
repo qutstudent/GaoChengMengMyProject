@@ -27,6 +27,7 @@ th,td{text-align: center;}
 		var url = "${pageContext.request.contextPath}/com/show?cid=" + cid
 				+"&jobName="+jobName+"&jobAddress="+jobAddress+"&releaseTime="+releaseTime+"&jobSalary="+jobSalary
 				+"&companyName="+companyName;
+		console.log(url);
 		//加载参数
 		window.location.href = url;
 	}

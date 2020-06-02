@@ -9,5 +9,6 @@ public interface IEboardService {
 	 *查询所有新闻和公告
 	 * */
 	List<Eboard> findAllJournalism();
+
 	
 }	

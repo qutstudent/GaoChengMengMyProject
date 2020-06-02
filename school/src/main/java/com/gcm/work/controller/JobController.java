@@ -17,7 +17,7 @@ public class JobController {
 	private IJobService iJobService;
 	/**
 	 * 查询出所有的职位
-	 * @author slj
+	 * @author gcm
 	 * @param *jobInfoExt 职位详细信息对象
 	 * @return
 	 * */

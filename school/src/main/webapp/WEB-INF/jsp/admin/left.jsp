@@ -20,6 +20,7 @@
 		<ul class="nav nav-list">
 			<li class="active font"><a href="${path}/com/findAllCompany" target="body">查询所有企业</a></li>
 			<li class="active font"><a href="${path}/user/findAllUser" target="body">查询所有求职者</a></li>
+
             <li class="active font"><a href="${path}/main/index" target="_parent">网站首页</a></li>
 		</ul>
 	   </div>
